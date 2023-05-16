@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 587568043}
   - component: {fileID: 587568042}
   m_Layer: 5
-  m_Name: SinglePlayer (1)
+  m_Name: SinglePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -609,7 +609,7 @@ RectTransform:
   m_GameObject: {fileID: 587568040}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7407408, y: 0.4519774, z: 1}
+  m_LocalScale: {x: 0.39098892, y: 0.4519774, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2082094782}
@@ -617,8 +617,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 67.8254, y: -2.0102}
-  m_SizeDelta: {x: 239.2885, y: 27.48}
+  m_AnchoredPosition: {x: -0.9523773, y: -2.0102081}
+  m_SizeDelta: {x: 239.28845, y: 27.47998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &587568042
 MonoBehaviour:
@@ -729,7 +729,7 @@ GameObject:
   - component: {fileID: 711629425}
   - component: {fileID: 711629424}
   m_Layer: 5
-  m_Name: SinglePlayer
+  m_Name: Choose Your Mode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1309,7 +1309,7 @@ RectTransform:
   m_GameObject: {fileID: 2082094781}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.35, y: 2.2125, z: 1}
+  m_LocalScale: {x: 2.5576172, y: 2.2125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 587568041}
@@ -1318,7 +1318,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -39, y: 101}
+  m_AnchoredPosition: {x: 55, y: 101}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2082094783
