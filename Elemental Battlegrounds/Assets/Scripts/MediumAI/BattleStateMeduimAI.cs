@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public enum battleStateAIEasy
+public enum battleStateAIMeduim
 {
     Start,
     Player1Turn,
@@ -13,15 +13,9 @@ public enum battleStateAIEasy
     Lost
 }
 
-public enum MoveType
-{
-    Attack,
-    Heal
-}
 
 
-
-public class BattleStateEasyAI : MonoBehaviour
+public class BattleStateMeduimAI : MonoBehaviour
 {
 
     public GameObject[] PlayerPrefab;
@@ -47,21 +41,19 @@ public class BattleStateEasyAI : MonoBehaviour
 
     private int aiOptions;
 
-    private int Starter;
-
-    
 
 
 
 
 
 
-    public battleStateAIEasy state;
+
+    public battleStateAIMeduim state;
     // Start is called before the first frame update
     void Start()
     {
 
-        state = battleStateAIEasy.Start;
+        state = battleStateAIMeduim.Start;
         StartCoroutine(SetUpBattle());
     }
 
@@ -70,7 +62,7 @@ public class BattleStateEasyAI : MonoBehaviour
     IEnumerator SetUpBattle()
     {
 
-        //Random Element at the start of the game for AI
+        //Random Element at the start of the game for Player2
 
         int randomEnemyElementIndex = Random.Range(0, EnemyPrefab.Length);
         GameObject enemyUnitPrefab = EnemyPrefab[randomEnemyElementIndex];
@@ -112,7 +104,7 @@ public class BattleStateEasyAI : MonoBehaviour
         // enemyGo.transform.localScale = new Vector3(.10f, .10f, 1);
         //EnemyUnit = enemyGo.GetComponent<Unit>();
 
-        dialogueText.text ="P1:"+ PlayerUnit.unitName + " VS CPU:" + EnemyUnit.unitName;
+        dialogueText.text = "P1:" + PlayerUnit.unitName + " VS CPU:" + EnemyUnit.unitName;
 
 
         playerHUD.SetUpHUD(PlayerUnit);
@@ -122,20 +114,9 @@ public class BattleStateEasyAI : MonoBehaviour
 
 
 
-        state = battleStateAIEasy.Player1Turn;
+        state = battleStateAIMeduim.Player1Turn;
+        PlayerTurn();
 
-        Starter = Random.Range(0,1);
-
-        if (Starter == 0)
-        {
-            state = battleStateAIEasy.Player1Turn;
-            PlayerTurn();
-        }
-        else if (Starter == 1)
-        {
-            state = battleStateAIEasy.AITurn;
-            AITurn();
-        }
     }
 
 
@@ -149,61 +130,61 @@ public class BattleStateEasyAI : MonoBehaviour
         // {
 
         yield return new WaitForSeconds(5f);
-       
 
-            bool isDead = PlayerUnit.TakeDamage(EnemyUnit.damage, EnemyUnit.element);
 
-            playerHUD.SetHP(PlayerUnit.currentHP);
-            dialogueText.text = "Your opponent has dealt Damage";
+        bool isDead = PlayerUnit.TakeDamage(EnemyUnit.damage, EnemyUnit.element);
 
-            yield return new WaitForSeconds(2f);
+        playerHUD.SetHP(PlayerUnit.currentHP);
+        dialogueText.text = "Your opponent has dealt Damage";
 
-            if (isDead)
-            {
-                state = battleStateAIEasy.Won;
-                StartCoroutine(EndBattle());
-            }
-            else
-            {
-                state = battleStateAIEasy.Player1Turn;
-                PlayerTurn();
+        yield return new WaitForSeconds(2f);
 
-            }
-       // }
+        if (isDead)
+        {
+            state = battleStateAIMeduim.Won;
+            StartCoroutine(EndBattle());
+        }
+        else
+        {
+            state = battleStateAIMeduim.Player1Turn;
+            PlayerTurn();
+
+        }
+        // }
 
     }
 
     IEnumerator PlayerAttack()
     {
-       // if (EnemyUnit.block == true)
-       // {
-           // dialogueText.text = "Player2 Has blocked the attack";
+        // if (EnemyUnit.block == true)
+        // {
+        // dialogueText.text = "Player2 Has blocked the attack";
 
-      //  }
-      //  else if(EnemyUnit.block ==false)
-      //  {
-            bool isDead = EnemyUnit.TakeDamage(PlayerUnit.damage, PlayerUnit.element);
-
-
-            enemyHUD.SetHP(EnemyUnit.currentHP);
-
-            dialogueText.text = "You have dealt Damage";
-            yield return new WaitForSeconds(2f);
+        //  }
+        //  else if(EnemyUnit.block ==false)
+        //  {
+        bool isDead = EnemyUnit.TakeDamage(PlayerUnit.damage, PlayerUnit.element);
 
 
-            if (isDead)
-            {
-                state = battleStateAIEasy.Won;
-                StartCoroutine(EndBattle());
-            }
-            else
-            {
-                state = battleStateAIEasy.AITurn;
-                AITurn();
+        enemyHUD.SetHP(EnemyUnit.currentHP);
+
+        dialogueText.text = "You have dealt Damage";
+        yield return new WaitForSeconds(2f);
 
 
-            }
-       
+        if (isDead)
+        {
+            state = battleStateAIMeduim.Won;
+            StartCoroutine(EndBattle());
+        }
+        else
+        {
+            state = battleStateAIMeduim.AITurn;
+            AITurn();
+
+
+        }
+
 
 
     }
@@ -211,11 +192,11 @@ public class BattleStateEasyAI : MonoBehaviour
 
 
 
-    
+
 
     IEnumerator EndBattle()
     {
-        if (state == battleStateAIEasy.Won)
+        if (state == battleStateAIMeduim.Won)
         {
             if (EnemyUnit.currentHP <= 0)
             {
@@ -240,11 +221,11 @@ public class BattleStateEasyAI : MonoBehaviour
 
         PlayerUnit.Heal(2);
         playerHUD.SetHP(PlayerUnit.currentHP);
-        dialogueText.text = "Player 1 Has Healed for: 2HP";
+        dialogueText.text = "You Have Healed for: 2HP";
 
         yield return new WaitForSeconds(2f);
 
-        state = battleStateAIEasy.AITurn;
+        state = battleStateAIMeduim.AITurn;
         AITurn();
 
     }
@@ -258,7 +239,7 @@ public class BattleStateEasyAI : MonoBehaviour
 
 
         yield return new WaitForSeconds(2f);
-        state = battleStateAIEasy.Player1Turn;
+        state = battleStateAIMeduim.Player1Turn;
         PlayerTurn();
     }
 
@@ -266,14 +247,14 @@ public class BattleStateEasyAI : MonoBehaviour
     {
         PlayerUnit.block = true;
         playerHUD.SetHP(PlayerUnit.currentHP);
-        dialogueText.text = "Player 1 Has blocked for 2 damage";
+        dialogueText.text = "You Have blocked for 2 damage";
 
         yield return new WaitForSeconds(2f);
         PlayerUnit.block = false;
-        state = battleStateAIEasy.AITurn;    
+        state = battleStateAIMeduim.AITurn;
         AITurn();
 
-        
+
     }
 
     IEnumerator AIBlock()
@@ -284,7 +265,7 @@ public class BattleStateEasyAI : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         EnemyUnit.block = false;
-        state = battleStateAIEasy.Player1Turn;
+        state = battleStateAIMeduim.Player1Turn;
         PlayerTurn();
     }
 
@@ -294,7 +275,7 @@ public class BattleStateEasyAI : MonoBehaviour
 
     public void PlayerTurn()
     {
-        dialogueText.text = "Player 1 Choose an action";
+        dialogueText.text = "Please Choose an action";
     }
 
 
@@ -304,11 +285,11 @@ public class BattleStateEasyAI : MonoBehaviour
 
         aiOptions = Random.Range(0, 2);
 
-        if(aiOptions == 0)
+        if (aiOptions == 0)
         {
             StartCoroutine(AIAttack());
         }
-        else if(aiOptions == 1)
+        else if (aiOptions == 1)
         {
             StartCoroutine(AIHeal());
         }
@@ -318,7 +299,7 @@ public class BattleStateEasyAI : MonoBehaviour
 
     public void OnAttackButton()
     {
-        if (state != battleStateAIEasy.Player1Turn)
+        if (state != battleStateAIMeduim.Player1Turn)
 
             return;
         StartCoroutine(PlayerAttack());
@@ -326,13 +307,13 @@ public class BattleStateEasyAI : MonoBehaviour
     }
 
 
-    
 
-    
+
+
 
     public void OnHealButton()
     {
-        if (state != battleStateAIEasy.Player1Turn)
+        if (state != battleStateAIMeduim.Player1Turn)
 
             return;
         StartCoroutine(PlayerHeal());
@@ -363,7 +344,6 @@ public class BattleStateEasyAI : MonoBehaviour
     }*/
 
 
-   
 
 
 

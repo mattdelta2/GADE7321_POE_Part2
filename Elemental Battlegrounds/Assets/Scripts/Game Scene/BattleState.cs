@@ -39,6 +39,8 @@ public class BattleState : MonoBehaviour
     Unit PlayerUnit;
     Unit EnemyUnit;
 
+    private int Starter;
+
 
 
 
@@ -108,10 +110,20 @@ public class BattleState : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
+        Starter = Random.Range(0, 1);
+
+        if(Starter == 0)
+        {
+            state = battleState.Player1Turn;
+            PlayerTurn();
+        }
+        else if(Starter == 1)
+        {
+            state = battleState.Player2Turn;
+            Player2Turn();
+        }
 
 
-        state = battleState.Player1Turn;
-        PlayerTurn();
 
     }
 
