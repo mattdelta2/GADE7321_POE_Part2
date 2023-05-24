@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public enum battleStateAIMeduim
+
+public enum battleStateAIHard
 {
     Start,
     Player1Turn,
@@ -13,9 +14,7 @@ public enum battleStateAIMeduim
     Lost
 }
 
-
-
-public class BattleStateMeduimAI : MonoBehaviour
+public class BattleStateHardAI : MonoBehaviour
 {
 
     public GameObject[] PlayerPrefab;
@@ -48,12 +47,12 @@ public class BattleStateMeduimAI : MonoBehaviour
 
 
 
-    public battleStateAIMeduim state;
+    public battleStateAIHard state;
     // Start is called before the first frame update
     void Start()
     {
 
-        state = battleStateAIMeduim.Start;
+        state = battleStateAIHard.Start;
         StartCoroutine(SetUpBattle());
     }
 
@@ -114,7 +113,7 @@ public class BattleStateMeduimAI : MonoBehaviour
 
 
 
-        state = battleStateAIMeduim.Player1Turn;
+        state = battleStateAIHard.Player1Turn;
         PlayerTurn();
 
     }
@@ -141,12 +140,12 @@ public class BattleStateMeduimAI : MonoBehaviour
 
         if (isDead)
         {
-            state = battleStateAIMeduim.Won;
+            state = battleStateAIHard.Won;
             StartCoroutine(EndBattle());
         }
         else
         {
-            state = battleStateAIMeduim.Player1Turn;
+            state = battleStateAIHard.Player1Turn;
             PlayerTurn();
 
         }
@@ -174,12 +173,12 @@ public class BattleStateMeduimAI : MonoBehaviour
 
         if (isDead)
         {
-            state = battleStateAIMeduim.Won;
+            state = battleStateAIHard.Won;
             StartCoroutine(EndBattle());
         }
         else
         {
-            state = battleStateAIMeduim.AITurn;
+            state = battleStateAIHard.AITurn;
             AITurn();
 
 
@@ -196,7 +195,7 @@ public class BattleStateMeduimAI : MonoBehaviour
 
     IEnumerator EndBattle()
     {
-        if (state == battleStateAIMeduim.Won)
+        if (state == battleStateAIHard.Won)
         {
             if (EnemyUnit.currentHP <= 0)
             {
@@ -225,7 +224,7 @@ public class BattleStateMeduimAI : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        state = battleStateAIMeduim.AITurn;
+        state = battleStateAIHard.AITurn;
         AITurn();
 
     }
@@ -233,13 +232,15 @@ public class BattleStateMeduimAI : MonoBehaviour
 
     IEnumerator AIHeal()
     {
+
+        yield return new WaitForSeconds(5f);
         EnemyUnit.Heal(2);
         enemyHUD.SetHP(EnemyUnit.currentHP);
         dialogueText.text = "Your Opponent Has Healed for: 2HP";
 
 
         yield return new WaitForSeconds(2f);
-        state = battleStateAIMeduim.Player1Turn;
+        state = battleStateAIHard.Player1Turn;
         PlayerTurn();
     }
 
@@ -251,7 +252,7 @@ public class BattleStateMeduimAI : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         PlayerUnit.block = false;
-        state = battleStateAIMeduim.AITurn;
+        state = battleStateAIHard.AITurn;
         AITurn();
 
 
@@ -265,7 +266,7 @@ public class BattleStateMeduimAI : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         EnemyUnit.block = false;
-        state = battleStateAIMeduim.Player1Turn;
+        state = battleStateAIHard.Player1Turn;
         PlayerTurn();
     }
 
@@ -283,9 +284,9 @@ public class BattleStateMeduimAI : MonoBehaviour
     {
         dialogueText.text = "Your Opponent is Thinking";
 
-        aiOptions = Random.Range(0, 50);
+        aiOptions = Random.Range(0, 250);
 
-        if (aiOptions <= 25)
+        if (aiOptions <= 125)
         {
             if (PlayerUnit.currentHP == 20)
             {
@@ -299,14 +300,14 @@ public class BattleStateMeduimAI : MonoBehaviour
             StartCoroutine(AIAttack());
 
         }
-        else if (aiOptions > 25)
+        else if (aiOptions > 125)
         {
-            if(PlayerUnit.currentHP == 20 && EnemyUnit.currentHP ==20)
+            if (PlayerUnit.currentHP == 20 && EnemyUnit.currentHP == 20)
             {
                 StartCoroutine(AIAttack());
 
             }
-            else if(PlayerUnit.currentHP <=10)
+            else if (PlayerUnit.currentHP <= 10)
             {
                 StartCoroutine(AIAttack());
             }
@@ -320,7 +321,7 @@ public class BattleStateMeduimAI : MonoBehaviour
 
     public void OnAttackButton()
     {
-        if (state != battleStateAIMeduim.Player1Turn)
+        if (state != battleStateAIHard.Player1Turn)
 
             return;
         StartCoroutine(PlayerAttack());
@@ -334,7 +335,7 @@ public class BattleStateMeduimAI : MonoBehaviour
 
     public void OnHealButton()
     {
-        if (state != battleStateAIMeduim.Player1Turn)
+        if (state != battleStateAIHard.Player1Turn)
 
             return;
         StartCoroutine(PlayerHeal());
@@ -363,14 +364,4 @@ public class BattleStateMeduimAI : MonoBehaviour
     {
 
     }*/
-
-
-
-
-
-
-
-
-
-
 }

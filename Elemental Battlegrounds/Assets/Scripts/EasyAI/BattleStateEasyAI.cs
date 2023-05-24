@@ -302,7 +302,7 @@ public class BattleStateEasyAI : MonoBehaviour
     {
         dialogueText.text = "Your Opponent is Thinking";
 
-        aiOptions = Random.Range(0, 2);
+        aiOptions = Random.Range(0, 1);
 
         if(aiOptions == 0)
         {
