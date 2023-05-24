@@ -295,7 +295,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &147059766
 RectTransform:
   m_ObjectHideFlags: 0
@@ -563,7 +563,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &291835039
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2199,8 +2199,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1714929645}
-        m_TargetAssemblyTypeName: BattleState, Assembly-CSharp
+      - m_Target: {fileID: 1714929646}
+        m_TargetAssemblyTypeName: BattleStateHardAI, Assembly-CSharp
         m_MethodName: OnHealButton
         m_Mode: 1
         m_Arguments:
@@ -2733,8 +2733,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1714929645}
-        m_TargetAssemblyTypeName: BattleState, Assembly-CSharp
+      - m_Target: {fileID: 1714929646}
+        m_TargetAssemblyTypeName: BattleStateHardAI, Assembly-CSharp
         m_MethodName: OnAttackButton
         m_Mode: 1
         m_Arguments:
@@ -2918,6 +2918,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1714929644}
   - component: {fileID: 1714929645}
+  - component: {fileID: 1714929646}
   m_Layer: 0
   m_Name: Battle System
   m_TagString: Untagged
@@ -2947,7 +2948,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714929642}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcc5b2dfebf9440428ea9d72ad433dbb, type: 3}
   m_Name: 
@@ -2973,7 +2974,41 @@ MonoBehaviour:
   dialogueText: {fileID: 1584004651}
   playerHUD: {fileID: 1727677078}
   enemyHUD: {fileID: 1290496122}
-  state: 1
+  state: 0
+--- !u!114 &1714929646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714929642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cead666af432c4449f9499cf451e30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerPrefab:
+  - {fileID: 1997154159753004290, guid: 4fad59e7f5142804caa479e759cd8b31, type: 3}
+  - {fileID: 3663568971972017561, guid: 23966f69e9cef3c40b2487b2cc9c2fa3, type: 3}
+  - {fileID: 4748358091056420457, guid: 952f6171e3098b14196e2acb068313ca, type: 3}
+  - {fileID: 7345274199306213163, guid: a968a069d3f8be449bd763799d9cc2e1, type: 3}
+  - {fileID: 8377284161677375627, guid: d7f50509712eb544cbd365b3cee782f8, type: 3}
+  - {fileID: 3504212672302188519, guid: 97910b62e9c00aa44b6a018f4f463d6d, type: 3}
+  - {fileID: 8811070832449586706, guid: e41e2732bf888e84fbe28dad77792e9c, type: 3}
+  EnemyPrefab:
+  - {fileID: 1997154159753004290, guid: 4fad59e7f5142804caa479e759cd8b31, type: 3}
+  - {fileID: 3663568971972017561, guid: 23966f69e9cef3c40b2487b2cc9c2fa3, type: 3}
+  - {fileID: 4748358091056420457, guid: 952f6171e3098b14196e2acb068313ca, type: 3}
+  - {fileID: 7345274199306213163, guid: a968a069d3f8be449bd763799d9cc2e1, type: 3}
+  - {fileID: 8377284161677375627, guid: d7f50509712eb544cbd365b3cee782f8, type: 3}
+  - {fileID: 3504212672302188519, guid: 97910b62e9c00aa44b6a018f4f463d6d, type: 3}
+  - {fileID: 8811070832449586706, guid: e41e2732bf888e84fbe28dad77792e9c, type: 3}
+  playerBattleStation: {fileID: 776899475}
+  enemyBattleStation: {fileID: 1466009198}
+  dialogueText: {fileID: 1584004651}
+  playerHUD: {fileID: 1727677078}
+  enemyHUD: {fileID: 1290496122}
+  state: 0
 --- !u!1 &1715227581
 GameObject:
   m_ObjectHideFlags: 0
