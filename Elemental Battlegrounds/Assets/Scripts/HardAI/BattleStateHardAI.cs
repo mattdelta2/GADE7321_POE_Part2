@@ -39,6 +39,10 @@ public class BattleStateHardAI : MonoBehaviour
     Unit EnemyUnit;
 
     private int aiOptions;
+    private int Starter;
+
+    public Button Attack;
+    public Button Heal;
 
 
 
@@ -53,6 +57,8 @@ public class BattleStateHardAI : MonoBehaviour
     {
 
         state = battleStateAIHard.Start;
+        Attack.enabled = false;
+        Heal.enabled = false;
         StartCoroutine(SetUpBattle());
     }
 
@@ -112,9 +118,22 @@ public class BattleStateHardAI : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
 
+        Starter = Random.Range(0, 2);
 
-        state = battleStateAIHard.Player1Turn;
-        PlayerTurn();
+        if (Starter == 0)
+        {
+            state = battleStateAIHard.Player1Turn;
+            PlayerTurn();
+        }
+        else if (Starter == 1)
+        {
+            state = battleStateAIHard.AITurn;
+            AITurn();
+        }
+
+
+
+
 
     }
 
@@ -128,6 +147,8 @@ public class BattleStateHardAI : MonoBehaviour
         // else if(PlayerUnit.block == false)
         // {
 
+        Attack.enabled = false;
+        Heal.enabled = false;
         yield return new WaitForSeconds(5f);
 
 
@@ -155,6 +176,8 @@ public class BattleStateHardAI : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
+        Attack.enabled = true;
+        
         // if (EnemyUnit.block == true)
         // {
         // dialogueText.text = "Player2 Has blocked the attack";
@@ -217,6 +240,8 @@ public class BattleStateHardAI : MonoBehaviour
 
     IEnumerator PlayerHeal()
     {
+        
+        Heal.enabled = true;
 
         PlayerUnit.Heal(2);
         playerHUD.SetHP(PlayerUnit.currentHP);
@@ -232,6 +257,8 @@ public class BattleStateHardAI : MonoBehaviour
 
     IEnumerator AIHeal()
     {
+        Attack.enabled = false;
+        Heal.enabled = false;
 
         yield return new WaitForSeconds(5f);
         EnemyUnit.Heal(2);
@@ -277,6 +304,8 @@ public class BattleStateHardAI : MonoBehaviour
     public void PlayerTurn()
     {
         dialogueText.text = "Please Choose an action";
+        Attack.enabled = true;
+        Heal.enabled = true;
     }
 
 

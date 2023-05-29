@@ -7,9 +7,9 @@ public enum Element
 {
     Fire,
     Water,
-    Wind,
+    Air,
     Lightning,
-    Earth,
+    Rock,
     Sun,
     Plant
 }
@@ -49,15 +49,15 @@ public class Unit : MonoBehaviour
         {
             damage *= 2;
         }
-        else if (element == Element.Plant && defender.element == Element.Wind)
+        else if (element == Element.Plant && defender.element == Element.Air)
         {
             damage *= 2;
         }
-        else if (element == Element.Wind && defender.element == Element.Earth)
+        else if (element == Element.Air && defender.element == Element.Rock)
         {
             damage *= 2;
         }
-        else if (element == Element.Earth && defender.element == Element.Lightning)
+        else if (element == Element.Rock && defender.element == Element.Lightning)
         {
             damage *= 2;
         }
@@ -90,15 +90,15 @@ public class Unit : MonoBehaviour
         {
             modifiedDamage *= 2;
         }
-        else if (attackerElement == Element.Plant && element == Element.Wind)
+        else if (attackerElement == Element.Plant && element == Element.Air)
         {
             modifiedDamage *= 2;
         }
-        else if (attackerElement == Element.Wind && element == Element.Earth)
+        else if (attackerElement == Element.Air && element == Element.Rock)
         {
             modifiedDamage *= 2;
         }
-        else if (attackerElement == Element.Earth && element == Element.Lightning)
+        else if (attackerElement == Element.Rock && element == Element.Lightning)
         {
             modifiedDamage *= 2;
         }

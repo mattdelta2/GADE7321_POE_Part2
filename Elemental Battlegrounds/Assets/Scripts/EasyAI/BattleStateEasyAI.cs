@@ -49,7 +49,10 @@ public class BattleStateEasyAI : MonoBehaviour
 
     private int Starter;
 
-    
+    public Button Attack;
+    public Button Heal;
+
+
 
 
 
@@ -63,6 +66,8 @@ public class BattleStateEasyAI : MonoBehaviour
 
         state = battleStateAIEasy.Start;
         StartCoroutine(SetUpBattle());
+        Attack.enabled = false;
+        Heal.enabled = false;
     }
 
 
@@ -124,7 +129,7 @@ public class BattleStateEasyAI : MonoBehaviour
 
         state = battleStateAIEasy.Player1Turn;
 
-        Starter = Random.Range(0,1);
+        Starter = Random.Range(0,2);
 
         if (Starter == 0)
         {
@@ -295,12 +300,16 @@ public class BattleStateEasyAI : MonoBehaviour
     public void PlayerTurn()
     {
         dialogueText.text = "Player 1 Choose an action";
+        Attack.enabled = true;
+        Heal.enabled = true;
     }
 
 
     public void AITurn()
     {
         dialogueText.text = "Your Opponent is Thinking";
+        Attack.enabled = false;
+        Heal.enabled = false;
 
         aiOptions = Random.Range(0, 1);
 

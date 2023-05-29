@@ -41,6 +41,11 @@ public class BattleState : MonoBehaviour
 
     private int Starter;
 
+    public Button Player1AttackBtn;
+    public Button Player1HealBtn;
+    public Button Player2AttackBtn;
+    public Button Player2HealBtn;
+
 
 
 
@@ -52,6 +57,10 @@ public class BattleState : MonoBehaviour
     {
 
         state = battleState.Start;
+        Player1AttackBtn.enabled = false;
+        Player1HealBtn.enabled = false;
+        Player2AttackBtn.enabled = false;
+        Player2HealBtn.enabled = false;
         StartCoroutine(SetUpBattle());
     }
 
@@ -110,7 +119,7 @@ public class BattleState : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        Starter = Random.Range(0, 1);
+        Starter = Random.Range(0, 2);
 
         if(Starter == 0)
         {
@@ -130,12 +139,16 @@ public class BattleState : MonoBehaviour
 
     IEnumerator Player2Attack()
     {
-       // if (PlayerUnit.block == true)
-      //  {
-       //     dialogueText.text = "Player 2 Has blocked the attack";
-       // }
-       // else if(PlayerUnit.block == false)
-       // {
+        // if (PlayerUnit.block == true)
+        //  {
+        //     dialogueText.text = "Player 2 Has blocked the attack";
+        // }
+        // else if(PlayerUnit.block == false)
+        // {
+
+        Player1AttackBtn.enabled = false;
+        Player1HealBtn.enabled = false;
+        Player2HealBtn.enabled = false;
             bool isDead = PlayerUnit.TakeDamage(EnemyUnit.damage, EnemyUnit.element);
 
             playerHUD.SetHP(PlayerUnit.currentHP);
@@ -160,13 +173,17 @@ public class BattleState : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
-       // if (EnemyUnit.block == true)
-       // {
-           // dialogueText.text = "Player2 Has blocked the attack";
+        // if (EnemyUnit.block == true)
+        // {
+        // dialogueText.text = "Player2 Has blocked the attack";
 
-      //  }
-      //  else if(EnemyUnit.block ==false)
-      //  {
+        //  }
+        //  else if(EnemyUnit.block ==false)
+        //  {
+
+        Player2AttackBtn.enabled = false;
+        Player2HealBtn.enabled = false;
+        Player1HealBtn.enabled = false;
             bool isDead = EnemyUnit.TakeDamage(PlayerUnit.damage, PlayerUnit.element);
 
 
@@ -266,6 +283,9 @@ public class BattleState : MonoBehaviour
 
     IEnumerator PlayerHeal()
     {
+        Player1AttackBtn.enabled = false;
+        Player2HealBtn.enabled=false;
+        Player2AttackBtn.enabled = false;
 
         PlayerUnit.Heal(2);
         playerHUD.SetHP(PlayerUnit.currentHP);
@@ -281,6 +301,11 @@ public class BattleState : MonoBehaviour
 
     IEnumerator Player2Heal()
     {
+        Player1AttackBtn.enabled = false;
+        Player1HealBtn.enabled = false;
+        Player2AttackBtn.enabled = false;
+
+
         EnemyUnit.Heal(2);
         enemyHUD.SetHP(EnemyUnit.currentHP);
         dialogueText.text = "Player 2 Has Healed for: 2HP";
@@ -324,12 +349,20 @@ public class BattleState : MonoBehaviour
     public void PlayerTurn()
     {
         dialogueText.text = "Player 1 Choose an action";
+        Player1AttackBtn.enabled = true;
+        Player1HealBtn.enabled = true;
+        Player2AttackBtn.enabled = false;
+        Player2HealBtn.enabled = false;
     }
 
 
     public void Player2Turn()
     {
         dialogueText.text = "Player 2 Choose an Action";
+        Player2AttackBtn.enabled = true;
+        Player2HealBtn.enabled = true;
+        Player1AttackBtn.enabled = false;
+        Player1HealBtn.enabled = false;
     }
 
 

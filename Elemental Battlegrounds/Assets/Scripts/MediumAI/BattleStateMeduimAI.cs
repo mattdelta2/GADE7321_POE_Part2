@@ -41,6 +41,9 @@ public class BattleStateMeduimAI : MonoBehaviour
 
     private int aiOptions;
 
+    public Button Attack;
+    public Button Heal;
+
 
 
 
@@ -52,7 +55,8 @@ public class BattleStateMeduimAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Attack.enabled = false;
+        Heal.enabled = false;
         state = battleStateAIMeduim.Start;
         StartCoroutine(SetUpBattle());
     }
@@ -276,11 +280,15 @@ public class BattleStateMeduimAI : MonoBehaviour
     public void PlayerTurn()
     {
         dialogueText.text = "Please Choose an action";
+        Attack.enabled = true;
+        Heal.enabled = true;
     }
 
 
     public void AITurn()
     {
+        Attack.enabled = false;
+        Heal.enabled = false;
         dialogueText.text = "Your Opponent is Thinking";
 
         aiOptions = Random.Range(0, 50);
